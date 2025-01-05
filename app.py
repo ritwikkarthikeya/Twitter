@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, send_from_directory
-from seleniumwire import webdriver as seleniumwire_webdriver
+from selenium import webdriver as webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
@@ -61,7 +61,7 @@ def run_script():
         }
 
         # Create the WebDriver with selenium-wire
-        driver = seleniumwire_webdriver.Chrome(
+        driver = webdriver.Chrome(
             service=Service(ChromeDriverManager().install()),
             options=chromeoptions
         )
