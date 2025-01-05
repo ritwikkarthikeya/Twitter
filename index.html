@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trends</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #040404;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #4CAF50;
+            font-size: 2.5em;
+        }
+
+        button {
+            background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.3em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 18px;
+    width: 10%;
+    height: 16%;
+        }
+
+        button:hover {
+            background-color: #0969d0;
+        }
+
+        #output {
+            background-color: rgb(255, 248, 248);
+            padding: 20px;
+            margin: 20px auto;
+            width: 70%;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-height: 150px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 1.1em;
+            color: #177630;
+        }
+
+        #run-again-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #run-again {
+            background-color: #FF9800;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        #run-again:hover {
+            background-color: #e68900;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #888;
+        }
+.header{
+    border-bottom: 2px solid white;
+    outline: none;
+    border-width: 10%;
+    margin-left: 13%;
+    margin-right: 13%;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Twitter Trends</h1>
+    </div>
+ 
+    
+    <div class="button-container">
+        <button id="save-trends">Run Script</button>
+        <button id="fetch-trends">All Results</button>
+    </div>
+
+    <pre id="output"></pre>
+
+    <div id="run-again-container" style="display: none;">
+        <button id="run-again">Run Query Again</button>
+    </div>
+    <div class="footer">
+        <p>Ritwik Karthikeya &copy; </p>
+    </div>
+
+    <script>
+        // Save trends to MongoDB
+        document.getElementById("save-trends").addEventListener("click", () => {
+            fetch('/run-script', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("output").textContent = data;
+                    // Hide the "Save Trends" button after the first click
+                    document.getElementById("save-trends").style.display = 'none';
+                    // Show the "Run Query Again" button
+                    document.getElementById("run-again-container").style.display = 'block';
+                })
+                .catch(error => {
+                    document.getElementById("output").textContent = "Error: " + error;
+                    // Show button in case of error
+                    document.getElementById("save-trends").style.display = 'inline';
+                });
+        });
+
+        // Run query again
+        document.getElementById("run-again").addEventListener("click", () => {
+            // Trigger the save trends process again
+            fetch('/run-script', { method: 'POST' })
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById("output").textContent = data;
+                })
+                .catch(error => {
+                    document.getElementById("output").textContent = "Error: " + error;
+                });
+        });
+
+        // Fetch trends from MongoDB
+        document.getElementById("fetch-trends").addEventListener("click", () => {
+            fetch('/fetch-trends')
+                .then(response => response.text())  // Parse as plain text
+                .then(data => {
+                    document.getElementById("output").textContent = data;  // Display the plain text data
+                })
+                .catch(error => {
+                    document.getElementById("output").textContent = "Error: " + error;
+                });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+198.23.239.134:6540:vzvmjuos:c9spnxefd326
+207.244.217.165:6712:vzvmjuos:c9spnxefd326
+107.172.163.27:6543:vzvmjuos:c9spnxefd326
+64.137.42.112:5157:vzvmjuos:c9spnxefd326
+173.211.0.148:6641:vzvmjuos:c9spnxefd326
+161.123.152.115:6360:vzvmjuos:c9spnxefd326
+167.160.180.203:6754:vzvmjuos:c9spnxefd326
+154.36.110.199:6853:vzvmjuos:c9spnxefd326
+173.0.9.70:5653:vzvmjuos:c9spnxefd326
+173.0.9.209:5792:vzvmjuos:c9spnxefd326
